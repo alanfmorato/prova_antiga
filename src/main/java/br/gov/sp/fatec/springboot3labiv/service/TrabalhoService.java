@@ -1,26 +1,27 @@
-package br.gov.sp.fatec.service;
+package br.gov.sp.fatec.springboot3labiv.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import br.gov.sp.fatec.entity.Trabalho;
-import br.gov.sp.fatec.repository.TrabalhoRepository;
+import br.gov.sp.fatec.springboot3labiv.entity.Trabalho;
+import br.gov.sp.fatec.springboot3labiv.repository.TrabalhoRepository;
 
+@Service
 public class TrabalhoService implements ITrabalhoService {
+
     @Autowired
     private TrabalhoRepository traRepo;
 
     @Override
-    public Trabalho buscaPorId(Long id) {
+    public Trabalho buscarPorId(Long id) {
         Optional<Trabalho> trabalhoOP = traRepo.findById(id);
         if(trabalhoOP.isPresent()){
             return trabalhoOP.get();
-
         }
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("id Invalido");
+        throw new UnsupportedOperationException("ID inválido!!'");
     }
 
     @Override
@@ -31,17 +32,15 @@ public class TrabalhoService implements ITrabalhoService {
         trabalho.getNota() == null ||
         trabalho.getJustificativa() == null ||
         trabalho.getDescricao() == null ||
-        trabalho.getData_hora_entrega() == null){
-        throw new UnsupportedOperationException("Valores Inválidos");
+        trabalho.getData_hora_entrega() == null) {
+        throw new IllegalArgumentException("Valores inválidos!");
         }
         return traRepo.save(trabalho);
-        // TODO Auto-generated method stub
     }
 
     @Override
-    public List<Trabalho> buscarTodos() {
+    public List<Trabalho> buscarTodosTrabalhos() {
         return traRepo.findAll();
-        // TODO Auto-generated method stub
     }
     
 }

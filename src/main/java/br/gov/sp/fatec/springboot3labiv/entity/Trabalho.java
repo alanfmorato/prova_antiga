@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.entity;
+package br.gov.sp.fatec.springboot3labiv.entity;
 
 import java.time.LocalDateTime;
 
@@ -14,11 +14,11 @@ import jakarta.persistence.Table;
 public class Trabalho {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define o id como auto_increment]
     @Column(name = "tra_id")
     private Long id;
 
-    @Column(name = "tra_titulo", unique = true)
+    @Column(name = "tra_titulo", unique =true)
     private String titulo;
 
     @Column(name = "tra_data_hora_entrega")
@@ -28,13 +28,16 @@ public class Trabalho {
     private String descricao;
 
     @Column(name = "tra_grupo")
-    private String grupo;
+    private String grupo; 
 
     @Column(name = "tra_nota")
     private Integer nota;
 
     @Column(name = "tra_justificativa")
     private String justificativa;
+
+    public Trabalho() {
+    }
 
     public Long getId() {
         return id;
@@ -92,6 +95,15 @@ public class Trabalho {
         this.justificativa = justificativa;
     }
 
+    public Trabalho(Long id, String titulo, LocalDateTime data_hora_entrega, String descricao, String grupo,
+        Integer nota, String justificativa) {
+        this.id = id;
+        this.titulo = titulo;
+        this.data_hora_entrega = data_hora_entrega;
+        this.descricao = descricao;
+        this.grupo = grupo;
+        this.nota = nota;
+        this.justificativa = justificativa;
+    }
 
-    
 }
