@@ -10,16 +10,15 @@ grant select, insert, delete, update on anotacao.* to user@'localhost';
 
 use anotacao;
 
-create table tra_trabalho (
- tra_id bigint primary key auto_increment,
- tra_titulo varchar(100) not null unique,
- tra_data_hora_entrega datetime not null,
- tra_descricao varchar(200),
- tra_grupo varchar(20) not null,
- tra_nota int,
- tra_justificativa varchar(100)
+create table dcn_dicionario (
+ dcn_id bigint primary key auto_increment,
+ dcn_verbete varchar(100) not null ,
+ dcn_significado varchar(200) not null ,
+ dcn_versao int,
+ dcn_data_hora_cadastro datetime not null,
+ dcn_data_hora_revisado datetime
 );
 
-insert into tra_trabalho (tra_titulo, tra_data_hora_entrega, tra_grupo, tra_nota, tra_justificativa)
- values ('Teste 1', current_timestamp(), 'Alpha', 6, 'Bom, mas falta conteúdo'),
- ('Teste 2', current_timestamp(), 'Beta', 3, 'Incompleto');
+insert into dcn_dicionario (dcn_verbete, dcn_significado, dcn_data_hora_cadastro)
+ values ('tupla','linha de uma tabela', '2023-10-01 10:00:06'),
+ ('tupla','conjunto de atributos relacionados', current_timestamp());

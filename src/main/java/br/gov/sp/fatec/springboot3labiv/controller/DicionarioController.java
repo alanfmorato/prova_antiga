@@ -11,30 +11,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.sp.fatec.springboot3labiv.entity.Trabalho;
-import br.gov.sp.fatec.springboot3labiv.service.ITrabalhoService;
+import br.gov.sp.fatec.springboot3labiv.entity.Dicionario;
+import br.gov.sp.fatec.springboot3labiv.service.IDicionarioService;
 
 @RestController
-@RequestMapping(value = "/trabalho")
+@RequestMapping(value = "/dicionario")
 @CrossOrigin
-public class TrabalhoController {
+public class DicionarioController {
 
     @Autowired
-    private ITrabalhoService service;
+    private IDicionarioService service;
 
     @GetMapping
-    public List<Trabalho> buscarTodos(){
+    public List<Dicionario> buscarTodos(){
         return service.buscarTodosTrabalhos();
     }
 
     @PostMapping
-    public Trabalho novoTrabalho(@RequestBody Trabalho trabalho){
-        return service.novoTrabalho(trabalho);
+    public Dicionario novoTrabalho(@RequestBody Dicionario dicionario){
+         return service.novoTrabalho(dicionario);
     }
 
-    @GetMapping(value = "/{id}")
-    public Trabalho buscarPorId(@PathVariable("id") Long id){
-        return service.buscarPorId(id);
+    @GetMapping("/buscar-dicionario/{verbete}/{significado}")
+    public List<Dicionario> buscarDicionario(
+            @PathVariable String verbete,
+            @PathVariable String significado
+    ) {
+        return service.buscarPorVerbeteESignificado(verbete, significado);
     }
-
 }
